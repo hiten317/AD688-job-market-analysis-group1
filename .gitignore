@@ -171,7 +171,6 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 data/lightcast_job_postings.csv
-images
 .history
 econometrica.csl
 job_trends_analysis_files
