@@ -1,0 +1,24 @@
+project: 
+  type: website
+
+website:
+  title: "Business Analytics, Data Science and Machine Learning Trends in Job Market"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: qualitative_research.qmd
+        text: Qualitative Research
+      - href: job_trends_analysis.qmd
+        text: Data Analysis
+      - href: career_plan_reco.qmd
+        text: Career Strategy
+
+format:
+  html:
+    theme: darkly
+    toc: true
+    csl: apa.csl
+    bibliography: references.bib
+    
+

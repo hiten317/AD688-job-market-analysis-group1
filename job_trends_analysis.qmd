@@ -1,0 +1,25 @@
+---
+title: "Business Analytics, Data Science and Machine Learning Trends"
+subtitle: "Quantitative analysis of Job market trends"
+author:
+  - name: Hiten Ladkani, Yao Ma, Xinhi Dang (Sheryl)
+    affiliations:
+      - id: bu
+        name: Boston University
+        city: Boston
+        state: MA
+  - name: Hiten Ladkani, Yao Ma, Xinhi Dang (Sheryl)
+    affiliations:
+      - ref: bu
+bibliography: references.bib
+csl: apa.csl
+format: 
+  html:
+    toc: true
+    number-sections: true
+    df-print: paged
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.

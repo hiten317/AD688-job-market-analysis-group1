@@ -1,0 +1,17 @@
+---
+title: "Welcome to our Job trends analysis in ML, Data Science and Business Analytics project"
+author: "Hiten Ladkani, Xinhi Dong (Sheryl), Yao Ma"
+format: html
+---
+
+# Welcome everyone! 
+
+This is a structure analysis of how three of the most competitive and rapidly evolving fields in data and tech are demanding candidates to constantly reskill and upskill. The purpose of the analysis is to identify patterns and gaps
+in the labour market and provide a summarized recommendation for ourselves and anyone interested in these domains so that we can land our dream jobs either in the United states or one's home country. 
+
+Please read through both the qualitative and quantitative analysis for detailed walkthrough of the approach and results. 
+
+***Good Luck***
+
+![Welcome Banner](images/homepage_image.png){ width=100% }
+
