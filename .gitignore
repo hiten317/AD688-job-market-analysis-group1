@@ -173,6 +173,5 @@ cython_debug/
 data/lightcast_job_postings.csv
 images
 .history
-apa.csl 
 econometrica.csl
 job_trends_analysis_files
