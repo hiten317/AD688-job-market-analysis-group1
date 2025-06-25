@@ -1,25 +1,39 @@
 ---
-title: "Business Analytics, Data Science and Machine Learning Trends"
-subtitle: "Quantitative analysis of Job market trends"
-author:
-  - name: Hiten Ladkani, Yao Ma, Xinhi Dang (Sheryl)
-    affiliations:
-      - id: bu
-        name: Boston University
-        city: Boston
-        state: MA
-  - name: Hiten Ladkani, Yao Ma, Xinhi Dang (Sheryl)
-    affiliations:
-      - ref: bu
-bibliography: references.bib
-csl: apa.csl
-format: 
+title: "Quantitative Analysis of Business Analytics, Data Science and Machine Learning"
+format:
   html:
     toc: true
+    toc-depth: 3
+    code-fold: true
     number-sections: true
-    df-print: paged
+    theme: darkly
+    bibliography: references.bib
+    csl: apa.csl
+execute:
+  echo: true
+  eval: true
+jupyter: python3
 ---
 
-## Quarto
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+# Geographical analysis of Business Analytics, Data Science and Machine Learning
+
+```{python}
+import pandas as pd
+import numpy as np
+import plotly.express as px
+import seaborn as sns
+import matplotlib.pyplot as plt
+import polars as pl
+from pyspark.sql import SparkSession
+
+# Start a Spark session
+spark = SparkSession.builder.appName("JobPostingsAnalysis").getOrCreate()
+# Load the CSV file into a Spark DataFrame
+df = spark.read.option("header", "true").option("inferSchema", "true").option("multiLine","true").option("escape", "\"").csv("./data/lightcast_job_postings.csv")
+
+# Show schema
+df.printSchema()
+df.show(5, truncate = False)
+
+```
