@@ -1,6 +1,6 @@
 ---
 title: "Welcome to our Job trends analysis in ML, Data Science and Business Analytics project"
-author: "Hiten Ladkani, Xinhi Dong (Sheryl), Yao Ma"
+author: "Hiten Ladkani, Xinyi Dong (Sheryl), Yao Ma"
 format: html
 ---
 
