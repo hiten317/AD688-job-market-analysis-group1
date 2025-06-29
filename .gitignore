@@ -175,3 +175,5 @@ data/lightcast_job_postings.csv
 econometrica.csl
 job_trends_analysis_files
 job_trends_analysis.ipynb
+.vscode
+job_trends_analysis_backup.ipynb
