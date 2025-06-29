@@ -1,0 +1,35 @@
+    ---
+title: "Business Analytics, ML and Data Science Job Market Analysis"
+subtitle: "Final Report"
+author:
+  - name: "Hiten Ladkani"
+    affiliations:
+      - ref: group1
+  - name: "Xinyi Dong (Sheryl)"
+    affiliations:
+      - ref: group1
+  - name: "Yao Ma (April)"
+    affiliations:
+      - ref: group1
+
+affiliations:
+  - id: group1
+    name: "AD688 Cloud Computing and Big Data Analytics Team"
+    city: "Boston"
+    country: "USA"
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-tools: true
+    number-sections: true
+    theme: cosmo
+  docx: default
+---
+
+
+
+ {{< include index.qmd >}}  
+ {{< include qualitative_research.qmd >}}  
+ {{< include job_trends_analysis.qmd >}}
+ {{< include career_plan_reco.qmd >}}

@@ -11,7 +11,8 @@ format:
     csl: apa.csl
 execute:
   echo: false
-  eval: true
+  eval: false
+  freeze: auto
 jupyter: python3
 ---
 
@@ -32,6 +33,7 @@ Summarise the findings
 #| echo: true
 #| code-fold: true
 #| warning: false
+#| eval: true
 import pandas as pd
 import numpy as np
 import plotly.express as px
@@ -686,6 +688,7 @@ ml_combined_df = ml_ba_da_df.unionByName(ml_ds_data_df)
 ```{python}
 #| warning: false
 #| output: false
+#| eval: false
 from pyspark.sql.functions import col, pow
 from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler, CountVectorizer
 from pyspark.ml import Pipeline
@@ -723,6 +726,7 @@ data.select("SALARY", "features").show(5, truncate = True)
 ```{python}
 #| warning: false
 #| output: false
+#| eval: false
 train_data, test_data = data.randomSplit([0.8, 0.2], seed = 317)
 print((train_data.count()), len(train_data.columns))
 print((test_data.count()), len(test_data.columns))
@@ -735,6 +739,7 @@ print((test_data.count()), len(test_data.columns))
 ```{python}
 #| warning: false
 #| output: false
+#| eval: false
 from pyspark.ml.regression import RandomForestRegressor
 
 # Initiating the model
@@ -750,6 +755,7 @@ rf_preds = rf_model.transform(train_data.select("SALARY", "features"))
 ```{python}
 #| warning: false
 #| output: false
+#| eval: false
 skill_features = cv_model.vocabulary  # List of strings
 all_feature_names = ["MIN_YEARS_EXPERIENCE", "EDU_IDX"] + skill_features
 
@@ -766,6 +772,7 @@ feature_df = pd.DataFrame({
 
 ```{python}
 #| warning: false
+#| eval: false
 top_n = 10
 top_features = feature_df.head(top_n)
 
@@ -786,6 +793,7 @@ plt.savefig("./visualizations/rf_feature_importance.png", dpi=300, bbox_inches='
 
 ```{python}
 #| warning: false
+#| eval: true
 from pyspark.ml.evaluation import RegressionEvaluator
 evaluator = RegressionEvaluator(labelCol="SALARY", predictionCol="prediction")
 
@@ -799,6 +807,11 @@ metrics_df = pd.DataFrame({
 metrics_df.to_csv("./data/rf_metrics_table.csv")
 print(metrics_df.to_string(index=False))
 ```
+
+```{include} ./data/rf_metrics_table.csv
+```
+
+
 
 **RF Evaluation & Analysis** - From extracting the feature importances we know that minimum years experience plays a strong driver in predicting salary, however in terms of others like Enterprise Architecture, Data analysis and MapReduce are specialized skills and since we are using both Business Analyst and Data Scientist job postings to train this it is hard to evaluate if this would affect the salaries of both the positions in the same way. Mostly Mapreduce and cloud architecture are not the skills that are expected from a data analyst so this is likely attributed to Data Scientist. From the results it seems it would have been better to train the model and then make predictions using it separately for both positions, this would have limited the number of features and would have made the model more streamlined. If we look at the RMSE of the model it is deviating $29.6K from the actual salary values while making predictions which is acceptable considering the real-world factors where only skill sets and experience alone won't determine the final value of the salary. However, these are strong drivers and from the R2 value the model is doing much better than capturing the mean value of the salary in the data range, however we would better look at RMSE values and features context than R2 for picking a model.
 
