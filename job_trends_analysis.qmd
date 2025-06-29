@@ -33,7 +33,7 @@ Summarise the findings
 #| echo: true
 #| code-fold: true
 #| warning: false
-#| eval: true
+#| eval: false
 import pandas as pd
 import numpy as np
 import plotly.express as px
@@ -793,7 +793,7 @@ plt.savefig("./visualizations/rf_feature_importance.png", dpi=300, bbox_inches='
 
 ```{python}
 #| warning: false
-#| eval: true
+#| eval: false
 from pyspark.ml.evaluation import RegressionEvaluator
 evaluator = RegressionEvaluator(labelCol="SALARY", predictionCol="prediction")
 
