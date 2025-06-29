@@ -1,0 +1,48 @@
+---
+title: "Individual Career Strategy based on Research and Quantitative analysis"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    number-sections: true
+    theme: darkly
+    bibliography: references.bib
+    csl: apa.csl
+execute:
+  echo: true
+  eval: true
+jupyter: python3
+---
+
+# Xinyi Dong (Sheryl) Carrer plan 
+![Sheryl's career path](./images/shery_career_path.png)
+
+
+
+
+
+
+
+# Yao Ma (April) Career plan
+![Yao's career path](./images/yao_career_path.png)
+
+
+
+
+
+
+
+
+# Hiten's Career plan
+![Hiten's career path](./images/hiten_career_path.png)
+
+
+
+
+
+
+
+# Conclusion:
+Each of our plan is based on the industry requirements as well as our the way we have envisioned our career paths for 3-5 years down the line. One element however is common in all of the career paths, the specific
+steps chosen are driven by the conclusions from research and quantitative analysis that was conducted. We found that constant learning and willingness to attain expertise in more than one skills is what is in demand in the current labor market. However, with the advent of AI soft skills like critical thinking, creativity and unconventional approach to problem solving is more at the forefront and we are striving to inculcate that approach in our daily practice. 
