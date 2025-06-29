@@ -12,7 +12,7 @@ format:
 execute:
   echo: false
   eval: false
-  freeze: auto
+  freeze: true
 jupyter: python3
 ---
 
