@@ -10,7 +10,7 @@ format:
     bibliography: references.bib
     csl: apa.csl
 execute:
-  echo: true
+  echo: false
   eval: true
 jupyter: python3
 ---
@@ -29,8 +29,9 @@ Summarise the findings
 # Data Cleaning and Preprocessing
 
 ```{python}
-#| code-fold: true
 #| echo: true
+#| code-fold: true
+#| warning: false
 import pandas as pd
 import numpy as np
 import plotly.express as px
@@ -88,12 +89,13 @@ ml_data_pd = ml_data_df.toPandas()
 ```
 
 ```{python}
-ml_data_df.select("TITLE_CLEAN").distinct().show(10, truncate=True)
+ml_data_df.select("TITLE_CLEAN").distinct().show(10, truncate=False)
 ```
 
 **ML specific positions are limited in title clean** - Since we cannot seem to distinguish the data between Data Science and Machine Learning, from the dataset using job titles, we will focus on Data Scientist and Business Analyst positions. Qualitative data also suggested a strong overlap between Data Science and Machine Learning positions because the current job market expects candidates for Data scientist positions to have skills in not just ML models but production deployment and Artificial intelligence as well. [@Nobrega2023DataScienceSkills]
 
 ```{python}
+#| output: false
 # Subsetting the main dataframe for Business Analyst, Data Analyst and Business Intelligence positions.
 
 ba_da_data_df = spark.sql("""
@@ -109,6 +111,7 @@ ba_da_data_pd = ba_da_data_df.toPandas()
 ```
 
 ```{python}
+#| output: false
 # Subsetting the main dataframe for Data Science positions.
 ds_data_df = spark.sql("""
                       SELECT *
@@ -121,6 +124,7 @@ ds_data_pd = ds_data_df.toPandas()
 ```
 
 ```{python}
+#| output: false
 # Condensing both dataframes to remove additional unncessary columns.
 ba_da_cols_to_drop = ['ONET_NAME', 'SOC_2021_2_NAME', 'SOC_2021_3_NAME', 'SOC_2021_4_NAME',
        'SOC_2021_5_NAME', 'LOT_CAREER_AREA_NAME', 'LOT_OCCUPATION_NAME','LOT_V6_SPECIALIZED_OCCUPATION_NAME',
@@ -130,6 +134,7 @@ ba_da_data_pd = ba_da_data_pd.drop(columns=ba_da_cols_to_drop, axis=1)
 ```
 
 ```{python}
+#| output: false
 # Removing job postings with no titles and min years of experience
 ba_da_data_pd = ba_da_data_pd.dropna(subset = ['TITLE_CLEAN'])
 ba_da_data_pd = ba_da_data_pd.dropna(subset = ['MIN_YEARS_EXPERIENCE'])
@@ -137,6 +142,7 @@ ba_da_data_pd = ba_da_data_pd.dropna(subset = ['MIN_YEARS_EXPERIENCE'])
 ```
 
 ```{python}
+#| output: false
 ds_data_cols_to_drop = ['ONET_NAME', 'SOC_2021_2_NAME', 'SOC_2021_3_NAME', 'SOC_2021_4_NAME','LOT_CAREER_AREA_NAME', 
                         'LOT_OCCUPATION_NAME','LOT_SPECIALIZED_OCCUPATION_NAME', 'LOT_V6_SPECIALIZED_OCCUPATION_NAME',
                         'LOT_V6_OCCUPATION_NAME', 'NAICS_2022_4_NAME', 'NAICS_2022_3_NAME','NAICS_2022_5_NAME', 'NAICS_2022_6_NAME',
@@ -146,6 +152,7 @@ ds_data_pd = ds_data_pd.drop(columns=ds_data_cols_to_drop, axis=1)
 ```
 
 ```{python}
+#| output: false
 # Removing job postings with no titles and min years of experience
 ds_data_pd = ds_data_pd.dropna(subset = ['TITLE_CLEAN'])
 ds_data_pd = ds_data_pd.dropna(subset = ['MIN_YEARS_EXPERIENCE'])
@@ -153,6 +160,7 @@ ds_data_pd = ds_data_pd.dropna(subset = ['MIN_YEARS_EXPERIENCE'])
 ```
 
 ```{python}
+#| output: false
 # Sorting categories under remote type name for both dataframes
 ba_da_data_pd['REMOTE_TYPE_NAME'].unique()
 ba_da_data_pd['REMOTE_TYPE'] = ba_da_data_pd['REMOTE_TYPE_NAME'].replace({
@@ -179,6 +187,7 @@ ds_data_pd['EMPLOYMENT_TYPE_NAME'].astype('category')
 ```
 
 ```{python}
+#| output: false
 # Converting education levels into 2 categories Bachelor's or lower and Master's or PhD
 import ast # Using ast.literal_eval to first convert stringified lists into python lists 
 import re # Need to remove those extra spaces in the Masters degree for proper classification
@@ -221,6 +230,7 @@ ds_data_pd['EDUCATION_LEVELS'] = ds_data_pd['EDUCATION_LEVELS_NAME'].apply(class
 ```
 
 ```{python}
+#| output: false
 # Separating Longitude and Latitude from the location column for maps visualization
 def extract_lat_long(location):
     try:
@@ -238,6 +248,7 @@ ds_data_pd[['LATITUDE', 'LONGITUDE']] = ds_data_pd['LOCATION'].apply(extract_lat
 ```
 
 ```{python}
+#| output: false
 ba_da_data_pd.drop(columns=['REMOTE_TYPE_NAME', 'EDUCATION_LEVELS_NAME', 
                             'LOCATION'], axis = 1, inplace = True)
 ds_data_pd.drop(columns=['REMOTE_TYPE_NAME', 'EDUCATION_LEVELS_NAME',
@@ -249,6 +260,7 @@ ds_data_pd.drop(columns=['REMOTE_TYPE_NAME', 'EDUCATION_LEVELS_NAME',
 # Geographical analysis of Business Analytics, Data Science and Machine Learning
 
 ```{python}
+#| warning: false
 # Since the data is ready we can now create comparison bar plots 
 # Top 10 states with highest number of job postings for Business Analyst, Data Analyst and Data Scientist positions
 import hvplot.pandas
@@ -274,10 +286,12 @@ combined_plot
 
 # Saving the plot for HTML rendering
 from holoviews import save
-hvplot.save(combined_plot, './visu::: {.center}
-<iframe src="./visualizations/top_states_job_postings.html" width="90%" height="600" frameborder="0"></iframe>
-:::
+hvplot.save(combined_plot, "./visualizations/top_states_job_postings.html") 
 ```
+
+<div style="text-align:center;">
+  <iframe src="./visualizations/top_states_job_postings.html" width="90%" height="600" frameborder="0"></iframe>
+</div>
 
 ```{python}
 #combined_plot
@@ -300,12 +314,14 @@ ba_da_map = ba_da_filtered.hvplot.points("LONGITUDE", y = "LATITUDE", geo = True
                                          title = 'Top 10 Industries hiring for BA/DA positions',
                                          width = 800, height = 500, xlim = (-130, -65), ylim = (24,50)).opts(
                                              legend_position = "bottom_left", legend_opts = {'label_text_font_size': '5pt',
-                                                                                           'title_text_font_size': '4pt'})
-hvplot.save(ba_da_map, "./visualizations/ba_da_indgeomap.html")           
-<iframe src="./visualizations/ba_da_indgeomap.html" width="90%" height="600" frameborder="0"></iframe>
-:::                              
+                                             'title_text_font_size': '4pt'})
+hvplot.save(ba_da_map, "./visualizations/ba_da_indgeomap.html")                             
 #ba_da_map
 ```
+
+<div style="text-align:center;">
+  <iframe src="./visualizations/ba_da_indgeomap.html" width="90%" height="600" frameborder="0"></iframe>
+</div>
 
 **Analysis** - We first identified our preferred industry and those were Marketing (Unclassified industry), Healthcare and Finance. By plotting the job postings for both BA/DA and Data Scientist positions, we looked at which states have high postings for these industries. The above plot is specifically for BA/DA jobs, we can see that along the east cost these industries are more prominent, specially in NYC, Boston, Philadelphia and Washington. When we move to the west, the tight cluster as expected is around LA and San Jose in California. Finance industry is more prominent on the east likely because of the presence of Wall street in NYC.
 
@@ -324,11 +340,16 @@ ds_map = ds_filtered.hvplot.points("LONGITUDE", y = "LATITUDE", geo = True,
                                          title = 'Top 10 Industries hiring for BA/DA positions',
                                          width = 800, height = 500, xlim = (-130, -65), ylim = (24,50)).opts(
                                              legend_position = "bottom_left", legend_opts = {'label_text_font_size': '5pt',
-                                                                                           'title_text_font_size': '4pt'})
+                                            'title_text_font_size': '4pt'})
 hvplot.save(ds_map, "./visualizations/ds_indgeomap.html")   
-<iframe src="./visualizations/ds_indgeomap.html" width="90%" height="600" frameborder="0"></iframe>                                      
+                                
 #ds_map
 ```
+
+<div style="text-align:center;">
+  <iframe src="./visualizations/ds_indgeomap.html" width="90%" height="600" frameborder="0"></iframe>
+</div>
+     
 
 **Analysis**- This plot focuses on the Data Science positions and it is evident that the number of jobs are considerably higher for this position regardless of the industry. The trend is similar to BA/DA positions in terms of clustering around east cost states and on the west coast in Sacramento, CA and San Jose. However, surprisingly for us Seattle has dense cluster for Healtcare and North Carolina and Chicago seem to have a big cluster for Marketing (Unclassified industry)
 
@@ -350,8 +371,12 @@ import kaleido
 combined_hist.write_html("./visualizations/salary_distribution.html")
 combined_hist.write_image("./visualizations/salary_distribution.png")
 
-combined_hist.show()
+#combined_hist.show()
 ```
+
+<div style="text-align:center;">
+  <iframe src="./visualizations/salary_distribution.html" width="90%" height="600" frameborder="0"></iframe>
+</div>
 
 **Salary distribution analysis:** We have now moved to the monetary value offered by both positions and we already know that data science being the senior position commands higher salary but the purpose of this plot is to identify what is the sweet spot of the salary range where both positions lie in 2024. The peak for BA/DA positoions is between $80K-$100K. We can also see from the overlay plot that the violin plot starts to shrink immediately after $100K and the right tail is light compared to Data science positions. For Data Scientist the median salary is $120K and the upper fence is almost $240K with much heavier right tails which is likely influenced by the information sector where salaries for this position can be as good as senior software developer position.
 
@@ -428,8 +453,14 @@ dist_fig.update_layout(
 )
 dist_fig.write_html("./visualizations/salary_dist_emp_ind.html")
 dist_fig.write_image("./visualizations/salary_dist_emp_ind.png")
-dist_fig.show()
+
+#dist_fig.show()
 ```
+
+<div style="text-align:center;">
+  <iframe src="./visualizations/salary_dist_emp_ind.html" width="90%" height="600" frameborder="0"></iframe>
+</div>
+
 
 **Salary distribution by Industry** - In the previous plot, we compared salaries at the highest level, in this case we are being more specific to industries we are interested in (Unclassified for Marketing, Finance and Health care). For BA/DA positions we can see that Finance sector appears to be more lucrative compared to unclassified and Healthcare. Median salary for full time BA/DA role is $112K whereas for Marketing and Healthcare it is close to $95K which seems to be okay for full time positions but the range does fall as low as $40K which could be for junior or entry level positions which is worrisome specially for us as international students as there is benchmark for H1b approval in terms of salaries. In terms of Data Science, all the 3 industries are very lucrative as the average salary is well above $120K and can go as high as $220K. Finance and Insurance in this case display more rapid growth.  
 
@@ -561,9 +592,16 @@ skill_bubble_ba_da.write_image("./visualizations/skill_bubble_ba.png")
 skill_bubble_ds.write_html("./visualizations/skill_bubble_ds.html")
 skill_bubble_ds.write_image("./visualizations/skill_bubble_ds.png")
 
-skill_bubble_ba_da.show()
-skill_bubble_ds.show()
+#skill_bubble_ba_da.show()
+#skill_bubble_ds.show()
 ```
+
+<div style="text-align:center;">
+  <iframe src="./visualizations/skill_bubble_ba.html" width="90%" height="600" frameborder="0"></iframe>
+</div>
+<div style="text-align:center;">
+  <iframe src="./visualizations/skill_bubble_ds.html" width="90%" height="600" frameborder="0"></iframe>
+</div>
 
 **Analysis Top 10 skills** - The above plot highlights top 10 skills from each skill type (Common, Specialized and Software skills), this will give a full overview of what is required to be successful in the role and match the demands of the current labor market in these domains. In terms of common skills, we can see that common skills or so to say soft skills like communication, Management and Problem solving are in both roles but the presence is considerably higher in Data scientist. Communication as expected is at the highest because both these roles require high collaboration. Strangely for data scientist, the postings that require Python is less but that could also be because some postings have the tendency to include Python libraries instead of using the tool name because they are looking for specific candidates who should know these libraries. Computer Science seems to be one of the highest requirement for data science which can be influenced by the Information and Tech sector. On BA/DA roles, Dashboarding and Business Intelligence tools are on higher scale because that is what the role entails, there is consistent use of SQL and BI tools alongwith some use of Python. 
 
@@ -608,15 +646,24 @@ hbar_ba.write_image("./visualizations/avg_exp_indba.png", width=1000, height=800
 hbar_ds.write_html("./visualizations/avg_exp_indds.html")
 hbar_ds.write_image("./visualizations/avg_exp_indds.png", width=1000, height=800, scale=2)
 
-hbar_ba.show()
-hbar_ds.show()
+#hbar_ba.show()
+#hbar_ds.show()
 ```
+
+<div style="text-align:center;">
+  <iframe src="./visualizations/avg_exp_indba.html" width="90%" height="600" frameborder="0"></iframe>
+</div>
+
+<div style="text-align:center;">
+  <iframe src="./visualizations/avg_exp_indds.html" width="90%" height="600" frameborder="0"></iframe>
+</div>
 
 **Average Experience by Industry Analysis** - When it comes to skills analysis, it is not just if a candidate knows the skill but how much experience is required also is critical. As per [@Singh2024DataAnalytics], he and his co-authors had explained that the industry at this point in time is valuing experience of using the skills on real-world data than just backing of academic projects. Hence, as we step into the job market in search of an ideal job it is critical to know what are the demands of the companies in our preferred industries (Healthcare, Marketing and Finance) in terms of the number of years of experience. Although the average minimum years experience for all these 3 industry groups is above 3, we can speculate this is likely caused because of some of the executive positions failling under these industries. However, it is important to note that even after removing those outliers we should be speculating something aroun 0-2 years range and that highlights the importance of collaborating on real-world projects, internships and putting in the work beyond the academics. 
 
 # Machine Learning: Random Forest for predicting Salary
 
 ```{python}
+#| warning: false
 # Converting pandas dataframes back into spark 
 ba_da_data_df = spark.createDataFrame(ba_da_data_pd)
 ds_data_df = spark.createDataFrame(ds_data_pd)
@@ -637,6 +684,8 @@ ml_combined_df = ml_ba_da_df.unionByName(ml_ds_data_df)
 # Cleaning the target variable and features in the dataset: Feature Engineering
 
 ```{python}
+#| warning: false
+#| output: false
 from pyspark.sql.functions import col, pow
 from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler, CountVectorizer
 from pyspark.ml import Pipeline
@@ -672,6 +721,8 @@ data.select("SALARY", "features").show(5, truncate = True)
 # Splitting the prepared data into Training and Test set
 
 ```{python}
+#| warning: false
+#| output: false
 train_data, test_data = data.randomSplit([0.8, 0.2], seed = 317)
 print((train_data.count()), len(train_data.columns))
 print((test_data.count()), len(test_data.columns))
@@ -682,6 +733,8 @@ print((test_data.count()), len(test_data.columns))
 ```
 
 ```{python}
+#| warning: false
+#| output: false
 from pyspark.ml.regression import RandomForestRegressor
 
 # Initiating the model
@@ -695,19 +748,24 @@ rf_preds = rf_model.transform(train_data.select("SALARY", "features"))
 ```
 
 ```{python}
+#| warning: false
+#| output: false
 skill_features = cv_model.vocabulary  # List of strings
 all_feature_names = ["MIN_YEARS_EXPERIENCE", "EDU_IDX"] + skill_features
 
 importances = rf_model.featureImportances.toArray()
+
 feature_df = pd.DataFrame({
     "Feature": all_feature_names,
     "Importance": importances
 }).sort_values(by="Importance", ascending=False)
+
 ```
 
 # Visualizing Feature Importance
 
 ```{python}
+#| warning: false
 top_n = 10
 top_features = feature_df.head(top_n)
 
@@ -718,12 +776,16 @@ plt.title(f"Top {top_n} Feature Importances from Random Forest")
 plt.gca().invert_yaxis()
 plt.tight_layout()
 plt.savefig("./visualizations/rf_feature_importance.png", dpi=300, bbox_inches='tight')
-plt.show()
+
+#plt.show()
 ```
+
+![Top 10 Rf imp](./visualizations/rf_feature_importance.png)
 
 # Extracting evaluation metrics 
 
 ```{python}
+#| warning: false
 from pyspark.ml.evaluation import RegressionEvaluator
 evaluator = RegressionEvaluator(labelCol="SALARY", predictionCol="prediction")
 
