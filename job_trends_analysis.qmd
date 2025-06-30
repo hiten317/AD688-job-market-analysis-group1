@@ -10,7 +10,7 @@ format:
     bibliography: references.bib
     csl: apa.csl
 execute:
-  echo: false
+  echo: false   
   eval: false
   freeze: true
   warning: false
@@ -33,6 +33,7 @@ Summarise the findings
 
 ```{python}
 #| warning: false
+#| eval: true
 
 import pandas as pd
 import numpy as np
