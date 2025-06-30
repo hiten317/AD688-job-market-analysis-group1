@@ -256,7 +256,9 @@ ds_data_pd.drop(columns=['REMOTE_TYPE_NAME', 'EDUCATION_LEVELS_NAME',
                         'LOCATION'], axis = 1, inplace = True)
 ```
 
-**Summarizing the cleaning of data for both positions:** The most important data cleaning steps performed here were slicing the data for each position to process them individually. Location column was separated into Latitude and Logitude to enable geographic analysis of job postings. Remote type, education levels and employment type columns were converted into categories to visualized summarized data. Skillsets columns will be cleaned at a later stage when we analyze top skills for each position and then progress into Machine Learning.
+**Summarizing the cleaning of data for both positions:** The most important data cleaning steps performed here were slicing the data for each position to process them individually. Location column was separated into Latitude and Logitude to enable geographic analysis of job postings. Remote type, education levels and employment type columns were converted into categories to visualized summarized data. Any NA columns that were present in any BA/DA or Data Scientist dataframes were removed. Salary column will be our response variable and hence NA rows were removed. 
+
+BA/DA dataframe was reduced to $11K rows and Data Scientist dataframe was reduced to $23K data points. Skillsets columns will be cleaned at a later stage when we analyze top skills for each position and then progress into Machine Learning.
 
 # Geographical analysis of Business Analytics, Data Science and Machine Learning
 
@@ -797,9 +799,9 @@ metrics_df.to_csv("./data/rf_metrics_table.csv")
 print(metrics_df.to_string(index=False))
 ```
 
-{include} ./data/rf_metrics_table.csv
+```{include} ./data/rf_metrics_table.csv
 
-
+```
 
 
 **RF Evaluation & Analysis** - From extracting the feature importances we know that minimum years experience plays a strong driver in predicting salary, however in terms of others like Enterprise Architecture, Data analysis and MapReduce are specialized skills and since we are using both Business Analyst and Data Scientist job postings to train this it is hard to evaluate if this would affect the salaries of both the positions in the same way. Mostly Mapreduce and cloud architecture are not the skills that are expected from a data analyst so this is likely attributed to Data Scientist. From the results it seems it would have been better to train the model and then make predictions using it separately for both positions, this would have limited the number of features and would have made the model more streamlined. If we look at the RMSE of the model it is deviating $29.6K from the actual salary values while making predictions which is acceptable considering the real-world factors where only skill sets and experience alone won't determine the final value of the salary. However, these are strong drivers and from the R2 value the model is doing much better than capturing the mean value of the salary in the data range, however we would better look at RMSE values and features context than R2 for picking a model.
