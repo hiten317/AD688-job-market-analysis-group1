@@ -10,9 +10,9 @@ format:
     bibliography: references.bib
     csl: apa.csl
 execute:
-  echo: true
+  echo: false
   eval: false
-  freeze: auto
+  freeze: true
   warning: false
   message: false
 jupyter: python3
