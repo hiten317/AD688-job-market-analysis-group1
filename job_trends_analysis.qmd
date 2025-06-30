@@ -13,6 +13,8 @@ execute:
   echo: false
   eval: false
   freeze: true
+  warning: false
+  message: false
 jupyter: python3
 ---
 
@@ -30,10 +32,8 @@ Summarise the findings
 # Data Cleaning and Preprocessing
 
 ```{python}
-#| echo: true
-#| code-fold: true
-#| warning: false
-#| eval: false
+
+
 import pandas as pd
 import numpy as np
 import plotly.express as px

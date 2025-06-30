@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -222,29 +187,6 @@ div.csl-indent {
 </section>
 <section id="data-cleaning-and-preprocessing" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Data Cleaning and Preprocessing</h1>
-<div id="194d893c" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>pio.renderers.default <span class="op">=</span> <span class="st">"notebook+notebook_connected+vscode"</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Start a Spark session</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>spark <span class="op">=</span> SparkSession.builder.appName(<span class="st">"JobPostingsAnalysis"</span>).getOrCreate()</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the CSV file into a Spark DataFrame</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> spark.read.option(<span class="st">"header"</span>, <span class="st">"true"</span>).option(<span class="st">"inferSchema"</span>, <span class="st">"true"</span>).option(<span class="st">"multiLine"</span>,<span class="st">"true"</span>).option(<span class="st">"escape"</span>, <span class="st">"</span><span class="ch">\"</span><span class="st">"</span>).csv(<span class="st">"./data/lightcast_job_postings.csv"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Show schema</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#df.show(5, truncate = False)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 <p><strong>ML specific positions are limited in title clean</strong> - Since we cannot seem to distinguish the data between Data Science and Machine Learning, from the dataset using job titles, we will focus on Data Scientist and Business Analyst positions. Qualitative data also suggested a strong overlap between Data Science and Machine Learning positions because the current job market expects candidates for Data scientist positions to have skills in not just ML models but production deployment and Artificial intelligence as well. <span class="citation" data-cites="Nobrega2023DataScienceSkills">(<a href="#ref-Nobrega2023DataScienceSkills" role="doc-biblioref">Nobrega, 2024</a>)</span></p>
 <p><strong>Summarizing the cleaning of data for both positions:</strong> The most important data cleaning steps performed here were slicing the data for each position to process them individually. Location column was separated into Latitude and Logitude to enable geographic analysis of job postings. Remote type, education levels and employment type columns were converted into categories to visualized summarized data. Skillsets columns will be cleaned at a later stage when we analyze top skills for each position and then progress into Machine Learning.</p>
 </section>
@@ -312,7 +254,7 @@ div.csl-indent {
 </section>
 <section id="extracting-evaluation-metrics" class="level1" data-number="11">
 <h1 data-number="11"><span class="header-section-number">11</span> Extracting evaluation metrics</h1>
-<p><code>mmnsvbozz ./data/rf_metrics_table.csv</code></p>
+<p><code>lmogutfvz ./data/rf_metrics_table.csv</code></p>
 <p><strong>RF Evaluation &amp; Analysis</strong> - From extracting the feature importances we know that minimum years experience plays a strong driver in predicting salary, however in terms of others like Enterprise Architecture, Data analysis and MapReduce are specialized skills and since we are using both Business Analyst and Data Scientist job postings to train this it is hard to evaluate if this would affect the salaries of both the positions in the same way. Mostly Mapreduce and cloud architecture are not the skills that are expected from a data analyst so this is likely attributed to Data Scientist. From the results it seems it would have been better to train the model and then make predictions using it separately for both positions, this would have limited the number of features and would have made the model more streamlined. If we look at the RMSE of the model it is deviating $29.6K from the actual salary values while making predictions which is acceptable considering the real-world factors where only skill sets and experience alone won’t determine the final value of the salary. However, these are strong drivers and from the R2 value the model is doing much better than capturing the mean value of the salary in the data range, however we would better look at RMSE values and features context than R2 for picking a model.</p>
 </section>
 <section id="conclusion" class="level1" data-number="12">
