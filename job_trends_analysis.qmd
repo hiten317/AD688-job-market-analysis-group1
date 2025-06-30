@@ -12,7 +12,7 @@ format:
 execute:
   echo: true
   eval: false
-  freeze: true
+  freeze: auto
   warning: false
   message: false
 jupyter: python3
@@ -42,9 +42,7 @@ import matplotlib.pyplot as plt
 import polars as pl
 from pyspark.sql import SparkSession
 import plotly.io as pio
-np.random.seed(42)
 
-pio.renderers.default = "notebook+notebook_connected+vscode"
 # Start a Spark session
 spark = SparkSession.builder.appName("JobPostingsAnalysis").getOrCreate()
 # Load the CSV file into a Spark DataFrame
@@ -186,7 +184,7 @@ ds_data_pd['EMPLOYMENT_TYPE_NAME'].astype('category')
 ```
 
 ```{python}
-#ba_da_data_pd['EDUCATION_LEVELS_NAME'].unique()
+ba_da_data_pd['EDUCATION_LEVELS_NAME'].unique()
 ```
 
 ```{python}
@@ -228,8 +226,8 @@ ds_data_pd['EDUCATION_LEVELS'] = ds_data_pd['EDUCATION_LEVELS_NAME'].apply(class
 ```
 
 ```{python}
-#ba_da_data_pd['EDUCATION_LEVELS'].unique()
-#ds_data_pd['EDUCATION_LEVELS'].unique()
+ba_da_data_pd['EDUCATION_LEVELS'].unique()
+ds_data_pd['EDUCATION_LEVELS'].unique()
 ```
 
 ```{python}

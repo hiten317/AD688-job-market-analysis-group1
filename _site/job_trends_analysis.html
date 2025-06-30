@@ -222,7 +222,7 @@ div.csl-indent {
 </section>
 <section id="data-cleaning-and-preprocessing" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Data Cleaning and Preprocessing</h1>
-<div id="2301b94a" class="cell" data-execution_count="1">
+<div id="63f97805" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -233,19 +233,17 @@ div.csl-indent {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql <span class="im">import</span> SparkSession</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>pio.renderers.default <span class="op">=</span> <span class="st">"notebook+notebook_connected+vscode"</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Start a Spark session</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>spark <span class="op">=</span> SparkSession.builder.appName(<span class="st">"JobPostingsAnalysis"</span>).getOrCreate()</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the CSV file into a Spark DataFrame</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> spark.read.option(<span class="st">"header"</span>, <span class="st">"true"</span>).option(<span class="st">"inferSchema"</span>, <span class="st">"true"</span>).option(<span class="st">"multiLine"</span>,<span class="st">"true"</span>).option(<span class="st">"escape"</span>, <span class="st">"</span><span class="ch">\"</span><span class="st">"</span>).csv(<span class="st">"./data/lightcast_job_postings.csv"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Show schema</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>df.show(<span class="dv">5</span>, truncate <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Start a Spark session</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>spark <span class="op">=</span> SparkSession.builder.appName(<span class="st">"JobPostingsAnalysis"</span>).getOrCreate()</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the CSV file into a Spark DataFrame</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> spark.read.option(<span class="st">"header"</span>, <span class="st">"true"</span>).option(<span class="st">"inferSchema"</span>, <span class="st">"true"</span>).option(<span class="st">"multiLine"</span>,<span class="st">"true"</span>).option(<span class="st">"escape"</span>, <span class="st">"</span><span class="ch">\"</span><span class="st">"</span>).csv(<span class="st">"./data/lightcast_job_postings.csv"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Show schema</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>df.show(<span class="dv">5</span>, truncate <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="6a696a43" class="cell" data-execution_count="2">
+<div id="d8451225" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cleaning the dataset to remove redundant variables</span></span>
@@ -263,14 +261,14 @@ div.csl-indent {
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>df_cleaned.show(<span class="dv">5</span>, truncate <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="ef02c50c" class="cell" data-execution_count="3">
+<div id="26377adf" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Listing data types of the cleaned DataFrame</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_cleaned.dtypes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="9e9469b0" class="cell" data-execution_count="4">
+<div id="45857be6" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting spark dataframe to SQL table to have subsets for Machine Learning positions.</span></span>
@@ -287,14 +285,14 @@ div.csl-indent {
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>ml_data_pd.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="8388b213" class="cell" data-execution_count="5">
+<div id="8aa01a89" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ml_data_df.select(<span class="st">"TITLE_CLEAN"</span>).distinct().show(<span class="dv">10</span>, truncate<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p><strong>ML specific positions are limited in title clean</strong> - Since we cannot seem to distinguish the data between Data Science and Machine Learning, from the dataset using job titles, we will focus on Data Scientist and Business Analyst positions. Qualitative data also suggested a strong overlap between Data Science and Machine Learning positions because the current job market expects candidates for Data scientist positions to have skills in not just ML models but production deployment and Artificial intelligence as well. <span class="citation" data-cites="Nobrega2023DataScienceSkills">(<a href="#ref-Nobrega2023DataScienceSkills" role="doc-biblioref">Nobrega, 2024</a>)</span></p>
-<div id="2c7b27f8" class="cell" data-execution_count="6">
+<div id="f16c128c" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subsetting the main dataframe for Business Analyst, Data Analyst and Business Intelligence positions.</span></span>
@@ -311,7 +309,7 @@ div.csl-indent {
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>ba_da_data_pd <span class="op">=</span> ba_da_data_df.toPandas()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="1e760d80" class="cell" data-execution_count="7">
+<div id="db9765e5" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subsetting the main dataframe for Data Science positions.</span></span>
@@ -325,7 +323,7 @@ div.csl-indent {
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>ds_data_pd <span class="op">=</span> ds_data_df.toPandas()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="f92e1704" class="cell" data-execution_count="8">
+<div id="892719df" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Condensing both dataframes to remove additional unncessary columns.</span></span>
@@ -336,7 +334,7 @@ div.csl-indent {
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>ba_da_data_pd.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="574037c6" class="cell" data-execution_count="9">
+<div id="482b159b" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Removing job postings with no titles and min years of experience</span></span>
@@ -345,7 +343,7 @@ div.csl-indent {
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#ba_da_data_pd.info()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="61bfb941" class="cell" data-execution_count="10">
+<div id="f77a2ba1" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ds_data_cols_to_drop <span class="op">=</span> [<span class="st">'ONET_NAME'</span>, <span class="st">'SOC_2021_2_NAME'</span>, <span class="st">'SOC_2021_3_NAME'</span>, <span class="st">'SOC_2021_4_NAME'</span>,<span class="st">'LOT_CAREER_AREA_NAME'</span>, </span>
@@ -356,7 +354,7 @@ div.csl-indent {
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ds_data_pd.info() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="bef14dd1" class="cell" data-execution_count="11">
+<div id="975e24f5" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Removing job postings with no titles and min years of experience</span></span>
@@ -365,7 +363,7 @@ div.csl-indent {
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>ds_data_pd.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="82cd4768" class="cell" data-execution_count="12">
+<div id="6bf49083" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sorting categories under remote type name for both dataframes</span></span>
@@ -389,13 +387,13 @@ div.csl-indent {
 <span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>ds_data_pd[<span class="st">'EMPLOYMENT_TYPE_NAME'</span>].astype(<span class="st">'category'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="4da45859" class="cell" data-execution_count="13">
+<div id="97364223" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ba_da_data_pd['EDUCATION_LEVELS_NAME'].unique()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ba_da_data_pd[<span class="st">'EDUCATION_LEVELS_NAME'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="91cba7cc" class="cell" data-execution_count="14">
+<div id="f2b03a7a" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting education levels into 2 categories Bachelor's or lower and Master's or PhD</span></span>
@@ -433,14 +431,14 @@ div.csl-indent {
 <span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>ds_data_pd[<span class="st">'EDUCATION_LEVELS'</span>] <span class="op">=</span> ds_data_pd[<span class="st">'EDUCATION_LEVELS_NAME'</span>].<span class="bu">apply</span>(classify_education_level).astype(<span class="st">'category'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="0f1c1bfa" class="cell" data-execution_count="15">
+<div id="b65c6ac0" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ba_da_data_pd['EDUCATION_LEVELS'].unique()</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ds_data_pd['EDUCATION_LEVELS'].unique()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ba_da_data_pd[<span class="st">'EDUCATION_LEVELS'</span>].unique()</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ds_data_pd[<span class="st">'EDUCATION_LEVELS'</span>].unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="e3c95c76" class="cell" data-execution_count="16">
+<div id="6af819ef" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separating Longitude and Latitude from the location column for maps visualization</span></span>
@@ -455,13 +453,13 @@ div.csl-indent {
 <span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>ds_data_pd[[<span class="st">'LATITUDE'</span>, <span class="st">'LONGITUDE'</span>]] <span class="op">=</span> ds_data_pd[<span class="st">'LOCATION'</span>].<span class="bu">apply</span>(extract_lat_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="7db76143" class="cell" data-execution_count="17">
+<div id="534f0dfd" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ba_da_data_pd[["LONGITUDE", "LATITUDE"]].head(5)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="2263089b" class="cell" data-execution_count="18">
+<div id="02c351fe" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>ba_da_data_pd.drop(columns<span class="op">=</span>[<span class="st">'REMOTE_TYPE_NAME'</span>, <span class="st">'EDUCATION_LEVELS_NAME'</span>, </span>
@@ -474,7 +472,7 @@ div.csl-indent {
 </section>
 <section id="geographical-analysis-of-business-analytics-data-science-and-machine-learning" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Geographical analysis of Business Analytics, Data Science and Machine Learning</h1>
-<div id="381cdc98" class="cell" data-execution_count="19">
+<div id="5d42a32e" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Since the data is ready we can now create comparison bar plots </span></span>
@@ -508,14 +506,14 @@ div.csl-indent {
 <div style="text-align:center;">
 <p><iframe src="./visualizations/top_states_job_postings.html" width="90%" height="600" frameborder="0"></iframe></p>
 </div>
-<div id="42e5e1a6" class="cell" data-execution_count="20">
+<div id="15935d72" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#combined_plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p><strong>Analysis</strong> - Our first step in laying our career path is to narrow down the geographical locations where the positions are frequently available, so we have better chance of landing a job. Higher the number of positions available in a location, higher the chances of landing a job even though the competition is high, the odds of receiving an offer remain optimistic. The above plot is an hvplot providing a side by side comparison of top 10 states in the US for Business Analyst/Data Analyst and Data Scientist positions. The data is aggregated by the number of positions available in each state. The plot shows that California, Texas, New York, and Florida are the top states for both positions, with California having the highest number of positions available. This is expected as these states have high concentrations of technology companies and startups, which are the primary employers of data professionals. To add a layer of granularity, we can see that very few positions focus on education levels for both positions. However, Data scientist positions generally demand for a Masters or PhD degree alongwith a strong experience in analytics and expertise in ML models. Surprisingly, Massachusetts does not fall in the top 10 states which is our preferred state but with current labor market these initial signs suggest that relocation should be considered to keep enough options open.</p>
-<div id="bc75ab90" class="cell" data-execution_count="21">
+<div id="c845a20b" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Geospatial analysis of top 10 industries that have BA/DA positions</span></span>
@@ -541,7 +539,7 @@ div.csl-indent {
 <p><iframe src="./visualizations/ba_da_indgeomap.html" width="90%" height="600" frameborder="0"></iframe></p>
 </div>
 <p><strong>Analysis</strong> - We first identified our preferred industry and those were Marketing (Unclassified industry), Healthcare and Finance. By plotting the job postings for both BA/DA and Data Scientist positions, we looked at which states have high postings for these industries. The above plot is specifically for BA/DA jobs, we can see that along the east cost these industries are more prominent, specially in NYC, Boston, Philadelphia and Washington. When we move to the west, the tight cluster as expected is around LA and San Jose in California. Finance industry is more prominent on the east likely because of the presence of Wall street in NYC.</p>
-<div id="c3d7f919" class="cell" data-execution_count="22">
+<div id="354fe128" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Geospatial analysis of top 10 industries that have Data scientist positions</span></span>
@@ -571,7 +569,7 @@ div.csl-indent {
 </section>
 <section id="salary-comparison-trends-across-both-positions" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Salary Comparison &amp; Trends across both positions</h1>
-<div id="04cef9ba" class="cell" data-execution_count="23">
+<div id="42618831" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combining both dataframes to create overlayed histograms </span></span>
@@ -596,7 +594,7 @@ div.csl-indent {
 <p><iframe src="./visualizations/salary_distribution.html" width="90%" height="600" frameborder="0"></iframe></p>
 </div>
 <p><strong>Salary distribution analysis:</strong> We have now moved to the monetary value offered by both positions and we already know that data science being the senior position commands higher salary but the purpose of this plot is to identify what is the sweet spot of the salary range where both positions lie in 2024. The peak for BA/DA positoions is between $80K-$100K. We can also see from the overlay plot that the violin plot starts to shrink immediately after $100K and the right tail is light compared to Data science positions. For Data Scientist the median salary is $120K and the upper fence is almost $240K with much heavier right tails which is likely influenced by the information sector where salaries for this position can be as good as senior software developer position.</p>
-<div id="8f348cd4" class="cell" data-execution_count="24">
+<div id="10a2ed08" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Salary distribution and employment type (Faceted)</span></span>
@@ -682,7 +680,7 @@ div.csl-indent {
 </section>
 <section id="skills-trends-analysis-across-business-analystdata-analyst-and-data-scientist-positions" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Skills Trends Analysis across Business Analyst/Data Analyst and Data Scientist positions</h1>
-<div id="800f3e9c" class="cell" data-execution_count="25">
+<div id="958e4c3e" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cleaning skills column to get them as list for each row and continue with analysis </span></span>
@@ -698,7 +696,7 @@ div.csl-indent {
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    ds_data_pd <span class="op">=</span> clean_skills_column(ds_data_pd, col)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="ecc31b69" class="cell" data-execution_count="26">
+<div id="bbdfcbaa" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Our thought process is to visualize first the top 10 skills for each role and based on how many times they appear </span></span>
@@ -720,7 +718,7 @@ div.csl-indent {
 <span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>all_skills <span class="op">=</span> pd.concat(skill_data, ignore_index<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="333eb1b5" class="cell" data-execution_count="27">
+<div id="ff088c58" class="cell" data-execution_count="27">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ba_da_top_skills <span class="op">=</span> {}</span>
@@ -750,7 +748,7 @@ div.csl-indent {
 <span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>        ds_top_skills <span class="op">=</span> skill_type_dict</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="50e88d43" class="cell" data-execution_count="28">
+<div id="7ef67bf3" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.graph_objects <span class="im">as</span> go</span>
@@ -826,7 +824,7 @@ div.csl-indent {
 <p><iframe src="./visualizations/skill_bubble_ds.html" width="90%" height="600" frameborder="0"></iframe></p>
 </div>
 <p><strong>Analysis Top 10 skills</strong> - The above plot highlights top 10 skills from each skill type (Common, Specialized and Software skills), this will give a full overview of what is required to be successful in the role and match the demands of the current labor market in these domains. In terms of common skills, we can see that common skills or so to say soft skills like communication, Management and Problem solving are in both roles but the presence is considerably higher in Data scientist. Communication as expected is at the highest because both these roles require high collaboration. Strangely for data scientist, the postings that require Python is less but that could also be because some postings have the tendency to include Python libraries instead of using the tool name because they are looking for specific candidates who should know these libraries. Computer Science seems to be one of the highest requirement for data science which can be influenced by the Information and Tech sector. On BA/DA roles, Dashboarding and Business Intelligence tools are on higher scale because that is what the role entails, there is consistent use of SQL and BI tools alongwith some use of Python.</p>
-<div id="d71608af" class="cell" data-execution_count="29">
+<div id="56e76aa7" class="cell" data-execution_count="29">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Average Min years of experience required across Industries for BA/DA and Data Science positions</span></span>
@@ -883,7 +881,7 @@ div.csl-indent {
 </section>
 <section id="machine-learning-random-forest-for-predicting-salary" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> Machine Learning: Random Forest for predicting Salary</h1>
-<div id="b26f34fe" class="cell" data-execution_count="30">
+<div id="4caae2ab" class="cell" data-execution_count="30">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Converting pandas dataframes back into spark </span></span>
@@ -906,7 +904,7 @@ div.csl-indent {
 </section>
 <section id="cleaning-the-target-variable-and-features-in-the-dataset-feature-engineering" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> Cleaning the target variable and features in the dataset: Feature Engineering</h1>
-<div id="03609849" class="cell" data-execution_count="31">
+<div id="2ddd310f" class="cell" data-execution_count="31">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.sql.functions <span class="im">import</span> col, <span class="bu">pow</span></span>
@@ -943,7 +941,7 @@ div.csl-indent {
 </section>
 <section id="splitting-the-prepared-data-into-training-and-test-set" class="level1" data-number="9">
 <h1 data-number="9"><span class="header-section-number">9</span> Splitting the prepared data into Training and Test set</h1>
-<div id="840ff50c" class="cell" data-execution_count="32">
+<div id="b28e12ae" class="cell" data-execution_count="32">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>train_data, test_data <span class="op">=</span> data.randomSplit([<span class="fl">0.8</span>, <span class="fl">0.2</span>], seed <span class="op">=</span> <span class="dv">317</span>)</span>
@@ -951,13 +949,13 @@ div.csl-indent {
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>((test_data.count()), <span class="bu">len</span>(test_data.columns))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="92b8e58b" class="cell" data-execution_count="33">
+<div id="6eaea753" class="cell" data-execution_count="33">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Excecuting Random Forest Model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="639dcaa3" class="cell" data-execution_count="34">
+<div id="818282b3" class="cell" data-execution_count="34">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.regression <span class="im">import</span> RandomForestRegressor</span>
@@ -972,7 +970,7 @@ div.csl-indent {
 <span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>rf_preds <span class="op">=</span> rf_model.transform(train_data.select(<span class="st">"SALARY"</span>, <span class="st">"features"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="88b74215" class="cell" data-execution_count="35">
+<div id="34194b41" class="cell" data-execution_count="35">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>skill_features <span class="op">=</span> cv_model.vocabulary  <span class="co"># List of strings</span></span>
@@ -989,7 +987,7 @@ div.csl-indent {
 </section>
 <section id="visualizing-feature-importance" class="level1" data-number="10">
 <h1 data-number="10"><span class="header-section-number">10</span> Visualizing Feature Importance</h1>
-<div id="06b89fa5" class="cell" data-execution_count="36">
+<div id="f6e830c4" class="cell" data-execution_count="36">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>top_n <span class="op">=</span> <span class="dv">10</span></span>
@@ -1015,7 +1013,7 @@ div.csl-indent {
 </section>
 <section id="extracting-evaluation-metrics" class="level1" data-number="11">
 <h1 data-number="11"><span class="header-section-number">11</span> Extracting evaluation metrics</h1>
-<div id="76619f58" class="cell" data-execution_count="37">
+<div id="81355006" class="cell" data-execution_count="37">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pyspark.ml.evaluation <span class="im">import</span> RegressionEvaluator</span>
