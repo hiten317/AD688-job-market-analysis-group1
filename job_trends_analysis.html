@@ -2,14 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.7.31">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Hiten Ladkani, Yao Ma, Xinhi Dang (Sheryl)">
-<meta name="author" content="Hiten Ladkani, Yao Ma, Xinhi Dang (Sheryl)">
 
-<title>Business Analytics, Data Science and Machine Learning Trends – Business Analytics, Data Science and Machine Learning Trends in Job Market</title>
+<title>Quantitative Analysis of Business Analytics, Data Science and Machine Learning – Business Analytics, Data Science and Machine Learning Trends in Job Market</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -38,10 +56,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2580c28f95b1377071fda7075a9dddb1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-80c09077537e770bc0236b53523298b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -122,7 +140,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#quarto" id="toc-quarto" class="nav-link active" data-scroll-target="#quarto"><span class="header-section-number">1</span> Quarto</a></li>
+  <li><a href="#introduction-to-quantitative-analysis" id="toc-introduction-to-quantitative-analysis" class="nav-link active" data-scroll-target="#introduction-to-quantitative-analysis"><span class="header-section-number">1</span> Introduction to Quantitative Analysis</a></li>
+  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology"><span class="header-section-number">2</span> Methodology</a></li>
+  <li><a href="#data-cleaning-and-preprocessing" id="toc-data-cleaning-and-preprocessing" class="nav-link" data-scroll-target="#data-cleaning-and-preprocessing"><span class="header-section-number">3</span> Data Cleaning and Preprocessing</a></li>
+  <li><a href="#geographical-analysis-of-business-analytics-data-science-and-machine-learning" id="toc-geographical-analysis-of-business-analytics-data-science-and-machine-learning" class="nav-link" data-scroll-target="#geographical-analysis-of-business-analytics-data-science-and-machine-learning"><span class="header-section-number">4</span> Geographical analysis of Business Analytics, Data Science and Machine Learning</a></li>
+  <li><a href="#salary-comparison-trends-across-both-positions" id="toc-salary-comparison-trends-across-both-positions" class="nav-link" data-scroll-target="#salary-comparison-trends-across-both-positions"><span class="header-section-number">5</span> Salary Comparison &amp; Trends across both positions</a></li>
+  <li><a href="#skills-trends-analysis-across-business-analystdata-analyst-and-data-scientist-positions" id="toc-skills-trends-analysis-across-business-analystdata-analyst-and-data-scientist-positions" class="nav-link" data-scroll-target="#skills-trends-analysis-across-business-analystdata-analyst-and-data-scientist-positions"><span class="header-section-number">6</span> Skills Trends Analysis across Business Analyst/Data Analyst and Data Scientist positions</a></li>
+  <li><a href="#machine-learning-random-forest-for-predicting-salary" id="toc-machine-learning-random-forest-for-predicting-salary" class="nav-link" data-scroll-target="#machine-learning-random-forest-for-predicting-salary"><span class="header-section-number">7</span> Machine Learning: Random Forest for predicting Salary</a></li>
+  <li><a href="#cleaning-the-target-variable-and-features-in-the-dataset-feature-engineering" id="toc-cleaning-the-target-variable-and-features-in-the-dataset-feature-engineering" class="nav-link" data-scroll-target="#cleaning-the-target-variable-and-features-in-the-dataset-feature-engineering"><span class="header-section-number">8</span> Cleaning the target variable and features in the dataset: Feature Engineering</a></li>
+  <li><a href="#splitting-the-prepared-data-into-training-and-test-set" id="toc-splitting-the-prepared-data-into-training-and-test-set" class="nav-link" data-scroll-target="#splitting-the-prepared-data-into-training-and-test-set"><span class="header-section-number">9</span> Splitting the prepared data into Training and Test set</a></li>
+  <li><a href="#visualizing-feature-importance" id="toc-visualizing-feature-importance" class="nav-link" data-scroll-target="#visualizing-feature-importance"><span class="header-section-number">10</span> Visualizing Feature Importance</a></li>
+  <li><a href="#extracting-evaluation-metrics" id="toc-extracting-evaluation-metrics" class="nav-link" data-scroll-target="#extracting-evaluation-metrics"><span class="header-section-number">11</span> Extracting evaluation metrics</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">12</span> Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -131,36 +160,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Business Analytics, Data Science and Machine Learning Trends</h1>
-<p class="subtitle lead">Quantitative analysis of Job market trends</p>
+<h1 class="title">Quantitative Analysis of Business Analytics, Data Science and Machine Learning</h1>
 </div>
 
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Authors</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Hiten Ladkani, Yao Ma, Xinhi Dang (Sheryl) </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Boston University
-          </p>
-      </div>
-    <div class="quarto-title-meta-contents">
-    <p class="author">Hiten Ladkani, Yao Ma, Xinhi Dang (Sheryl) </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Boston University
-          </p>
-      </div>
-  </div>
 
 <div class="quarto-title-meta">
 
-      
+    
   
     
   </div>
@@ -170,14 +177,102 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="quarto" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="quarto"><span class="header-section-number">1</span> Quarto</h2>
-<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
+<section id="introduction-to-quantitative-analysis" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction to Quantitative Analysis</h1>
+<p>Now that we had a deep dive in qualtitative analysis of Machine Learning, Data Analyst and Data Scientist positions, we want to leverage the Lightcast job postings data from 2024 to verify whether the findings from the research align with the current data from the market. One of the consistent themes from the research was an overlap between Machine Learning and Data Science positions because of skillsets required for these experienced roles. We will also explore if Business analyst/Data analyst positions have few most in-demand skillsets and what are they as these are foundational roles in data.</p>
+</section>
+<section id="methodology" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Methodology</h1>
+<p>The first step would be to clean the dataset and identify the most relevant columns. Subset the data for Machine Learning, BA/DA and Data scientist positions data so these can be processed in silos Peform EDA for each role and highlight patterns or trends Perform Random Forest algorithms to predict salaries for these positions Summarise the findings</p>
+</section>
+<section id="data-cleaning-and-preprocessing" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Data Cleaning and Preprocessing</h1>
+<p><strong>ML specific positions are limited in title clean</strong> - Since we cannot seem to distinguish the data between Data Science and Machine Learning, from the dataset using job titles, we will focus on Data Scientist and Business Analyst positions. Qualitative data also suggested a strong overlap between Data Science and Machine Learning positions because the current job market expects candidates for Data scientist positions to have skills in not just ML models but production deployment and Artificial intelligence as well. <span class="citation" data-cites="Nobrega2023DataScienceSkills">(<a href="#ref-Nobrega2023DataScienceSkills" role="doc-biblioref">Nobrega, 2024</a>)</span></p>
+<p><strong>Summarizing the cleaning of data for both positions:</strong> The most important data cleaning steps performed here were slicing the data for each position to process them individually. Location column was separated into Latitude and Logitude to enable geographic analysis of job postings. Remote type, education levels and employment type columns were converted into categories to visualized summarized data. Skillsets columns will be cleaned at a later stage when we analyze top skills for each position and then progress into Machine Learning.</p>
+</section>
+<section id="geographical-analysis-of-business-analytics-data-science-and-machine-learning" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Geographical analysis of Business Analytics, Data Science and Machine Learning</h1>
+<div style="text-align:center;">
+<p><iframe src="./visualizations/top_states_job_postings.html" width="90%" height="600" frameborder="0"></iframe></p>
+</div>
+<p><strong>Analysis</strong> - Our first step in laying our career path is to narrow down the geographical locations where the positions are frequently available, so we have better chance of landing a job. Higher the number of positions available in a location, higher the chances of landing a job even though the competition is high, the odds of receiving an offer remain optimistic. The above plot is an hvplot providing a side by side comparison of top 10 states in the US for Business Analyst/Data Analyst and Data Scientist positions. The data is aggregated by the number of positions available in each state. The plot shows that California, Texas, New York, and Florida are the top states for both positions, with California having the highest number of positions available. This is expected as these states have high concentrations of technology companies and startups, which are the primary employers of data professionals. To add a layer of granularity, we can see that very few positions focus on education levels for both positions. However, Data scientist positions generally demand for a Masters or PhD degree alongwith a strong experience in analytics and expertise in ML models. Surprisingly, Massachusetts does not fall in the top 10 states which is our preferred state but with current labor market these initial signs suggest that relocation should be considered to keep enough options open.</p>
+<div style="text-align:center;">
+<p><iframe src="./visualizations/ba_da_indgeomap.html" width="90%" height="600" frameborder="0"></iframe></p>
+</div>
+<p><strong>Analysis</strong> - We first identified our preferred industry and those were Marketing (Unclassified industry), Healthcare and Finance. By plotting the job postings for both BA/DA and Data Scientist positions, we looked at which states have high postings for these industries. The above plot is specifically for BA/DA jobs, we can see that along the east cost these industries are more prominent, specially in NYC, Boston, Philadelphia and Washington. When we move to the west, the tight cluster as expected is around LA and San Jose in California. Finance industry is more prominent on the east likely because of the presence of Wall street in NYC.</p>
+<div style="text-align:center;">
+<p><iframe src="./visualizations/ds_indgeomap.html" width="90%" height="600" frameborder="0"></iframe></p>
+</div>
+<p><strong>Analysis</strong>- This plot focuses on the Data Science positions and it is evident that the number of jobs are considerably higher for this position regardless of the industry. The trend is similar to BA/DA positions in terms of clustering around east cost states and on the west coast in Sacramento, CA and San Jose. However, surprisingly for us Seattle has dense cluster for Healtcare and North Carolina and Chicago seem to have a big cluster for Marketing (Unclassified industry)</p>
+</section>
+<section id="salary-comparison-trends-across-both-positions" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Salary Comparison &amp; Trends across both positions</h1>
+<div style="text-align:center;">
+<p><iframe src="./visualizations/salary_distribution.html" width="90%" height="600" frameborder="0"></iframe></p>
+</div>
+<p><strong>Salary distribution analysis:</strong> We have now moved to the monetary value offered by both positions and we already know that data science being the senior position commands higher salary but the purpose of this plot is to identify what is the sweet spot of the salary range where both positions lie in 2024. The peak for BA/DA positoions is between $80K-$100K. We can also see from the overlay plot that the violin plot starts to shrink immediately after $100K and the right tail is light compared to Data science positions. For Data Scientist the median salary is $120K and the upper fence is almost $240K with much heavier right tails which is likely influenced by the information sector where salaries for this position can be as good as senior software developer position.</p>
+<div style="text-align:center;">
+<p><iframe src="./visualizations/salary_dist_emp_ind.html" width="90%" height="600" frameborder="0"></iframe></p>
+</div>
+<p><strong>Salary distribution by Industry</strong> - In the previous plot, we compared salaries at the highest level, in this case we are being more specific to industries we are interested in (Unclassified for Marketing, Finance and Health care). For BA/DA positions we can see that Finance sector appears to be more lucrative compared to unclassified and Healthcare. Median salary for full time BA/DA role is $112K whereas for Marketing and Healthcare it is close to $95K which seems to be okay for full time positions but the range does fall as low as $40K which could be for junior or entry level positions which is worrisome specially for us as international students as there is benchmark for H1b approval in terms of salaries. In terms of Data Science, all the 3 industries are very lucrative as the average salary is well above $120K and can go as high as $220K. Finance and Insurance in this case display more rapid growth.</p>
+</section>
+<section id="skills-trends-analysis-across-business-analystdata-analyst-and-data-scientist-positions" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Skills Trends Analysis across Business Analyst/Data Analyst and Data Scientist positions</h1>
+<div style="text-align:center;">
+<p><iframe src="./visualizations/skill_bubble_ba.html" width="90%" height="600" frameborder="0"></iframe></p>
+</div>
+<div style="text-align:center;">
+<p><iframe src="./visualizations/skill_bubble_ds.html" width="90%" height="600" frameborder="0"></iframe></p>
+</div>
+<p><strong>Analysis Top 10 skills</strong> - The above plot highlights top 10 skills from each skill type (Common, Specialized and Software skills), this will give a full overview of what is required to be successful in the role and match the demands of the current labor market in these domains. In terms of common skills, we can see that common skills or so to say soft skills like communication, Management and Problem solving are in both roles but the presence is considerably higher in Data scientist. Communication as expected is at the highest because both these roles require high collaboration. Strangely for data scientist, the postings that require Python is less but that could also be because some postings have the tendency to include Python libraries instead of using the tool name because they are looking for specific candidates who should know these libraries. Computer Science seems to be one of the highest requirement for data science which can be influenced by the Information and Tech sector. On BA/DA roles, Dashboarding and Business Intelligence tools are on higher scale because that is what the role entails, there is consistent use of SQL and BI tools alongwith some use of Python.</p>
+<div style="text-align:center;">
+<p><iframe src="./visualizations/avg_exp_indba.html" width="90%" height="600" frameborder="0"></iframe></p>
+</div>
+<div style="text-align:center;">
+<p><iframe src="./visualizations/avg_exp_indds.html" width="90%" height="600" frameborder="0"></iframe></p>
+</div>
+<p><strong>Average Experience by Industry Analysis</strong> - When it comes to skills analysis, it is not just if a candidate knows the skill but how much experience is required also is critical. As per <span class="citation" data-cites="Singh2024DataAnalytics">(<a href="#ref-Singh2024DataAnalytics" role="doc-biblioref">Pushpa Singh &amp; Garg, 2024</a>)</span>, he and his co-authors had explained that the industry at this point in time is valuing experience of using the skills on real-world data than just backing of academic projects. Hence, as we step into the job market in search of an ideal job it is critical to know what are the demands of the companies in our preferred industries (Healthcare, Marketing and Finance) in terms of the number of years of experience. Although the average minimum years experience for all these 3 industry groups is above 3, we can speculate this is likely caused because of some of the executive positions failling under these industries. However, it is important to note that even after removing those outliers we should be speculating something aroun 0-2 years range and that highlights the importance of collaborating on real-world projects, internships and putting in the work beyond the academics.</p>
+</section>
+<section id="machine-learning-random-forest-for-predicting-salary" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Machine Learning: Random Forest for predicting Salary</h1>
+</section>
+<section id="cleaning-the-target-variable-and-features-in-the-dataset-feature-engineering" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Cleaning the target variable and features in the dataset: Feature Engineering</h1>
+<p><strong>Feature Selection</strong> - For continuous variables I have used minimum experience required for a job posting because that will be an indicator for junior and more senior level roles as we have some executive roles as well. For categorical variables, we have selected specialized skills because those skills ideally set the salary, for eg if we know SQL plus AWS services and how to work with RDS then we might command higher salary then those that know SQL and Excel but no cloud knowledge. Also we used Vectorizer instead of one Hot encoding just to limit the number of features and keep the computation stable.</p>
+</section>
+<section id="splitting-the-prepared-data-into-training-and-test-set" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Splitting the prepared data into Training and Test set</h1>
+</section>
+<section id="visualizing-feature-importance" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Visualizing Feature Importance</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./visualizations/rf_feature_importance.png" class="img-fluid figure-img"></p>
+<figcaption>Top 10 Rf imp</figcaption>
+</figure>
+</div>
+</section>
+<section id="extracting-evaluation-metrics" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Extracting evaluation metrics</h1>
+<p>{include} ./data/rf_metrics_table.csv</p>
+<p><strong>RF Evaluation &amp; Analysis</strong> - From extracting the feature importances we know that minimum years experience plays a strong driver in predicting salary, however in terms of others like Enterprise Architecture, Data analysis and MapReduce are specialized skills and since we are using both Business Analyst and Data Scientist job postings to train this it is hard to evaluate if this would affect the salaries of both the positions in the same way. Mostly Mapreduce and cloud architecture are not the skills that are expected from a data analyst so this is likely attributed to Data Scientist. From the results it seems it would have been better to train the model and then make predictions using it separately for both positions, this would have limited the number of features and would have made the model more streamlined. If we look at the RMSE of the model it is deviating $29.6K from the actual salary values while making predictions which is acceptable considering the real-world factors where only skill sets and experience alone won’t determine the final value of the salary. However, these are strong drivers and from the R2 value the model is doing much better than capturing the mean value of the salary in the data range, however we would better look at RMSE values and features context than R2 for picking a model.</p>
+</section>
+<section id="conclusion" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> Conclusion</h1>
+<p>Summarizing the analysis from the various processes that we conducted above, we can briefly conclude that the market is extremely competitive at this stage, even though we did not look at specific AI trends from skills perspective we know that it has pushed the standards in the market up for data analysts as well by some margin. SQL is the core of data analysis be it data scientist or analyst, this tool becomes the first access point to data and is essential to condense the data into smaller subsets relatively to process it further of ML experimentation or insights reporting through dashboards. From an experience standpoint, simply completing Masters with generalized projects won’t make the cut, there has to be specific strategic learning process to get ahead of the clutter in the labor market. Lastly, in terms of further analysis we could further group the skills into subsets and use some NLP techniques to capture what specific skills in an industry can be mapped to either of these positions and what is common irrespective of the vertical. Although we are able to make some general statements about this but interesting patterns could be discovered from this analysis.</p>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Nobrega2023DataScienceSkills" class="csl-entry" role="listitem">
+Nobrega, S. (2024). <em>The 5 data science skills you can’t ignore in 2024</em>. <a href="https://towardsdatascience.com/the-5-data-science-skills-you-cant-ignore-in-2024-ceba3ea7726c">https://towardsdatascience.com/the-5-data-science-skills-you-cant-ignore-in-2024-ceba3ea7726c</a>
+</div>
+<div id="ref-Singh2024DataAnalytics" class="csl-entry" role="listitem">
+Pushpa Singh, A. R. M., &amp; Garg, P. (2024). <em>Data analytics and machine learning: Navigating the big data landscape</em> (Vol. 145). Springer Nature. <a href="https://doi.org/10.1007/978-981-97-0448-4">https://doi.org/10.1007/978-981-97-0448-4</a>
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -250,7 +345,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/hiten317\.github\.io\/AD688-job-market-analysis-group1\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
