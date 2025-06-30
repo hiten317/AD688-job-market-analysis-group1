@@ -25,6 +25,8 @@ format:
     number-sections: true
     theme: cosmo
   docx: default
+  csl: apa.csl
+  bibliography: references.bib
 ---
 
 
