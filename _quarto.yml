@@ -21,8 +21,3 @@ format:
     toc: true
     csl: apa.csl
     bibliography: references.bib
-execute:
-  echo: false
-  eval: false
-  code-fold: true   
-

@@ -10,7 +10,7 @@ format:
     bibliography: references.bib
     csl: apa.csl
 execute:
-  echo: false  
+  echo: true
   eval: false
   freeze: true
   warning: false
@@ -51,7 +51,7 @@ spark = SparkSession.builder.appName("JobPostingsAnalysis").getOrCreate()
 df = spark.read.option("header", "true").option("inferSchema", "true").option("multiLine","true").option("escape", "\"").csv("./data/lightcast_job_postings.csv")
 
 # Show schema
-#df.show(5, truncate = False)
+df.show(5, truncate = False)
 ```
 
 ```{python}
@@ -67,12 +67,12 @@ cols_to_drop = ["ID", "LAST_UPDATED_DATE", "LAST_UPDATED_TIMESTAMP", "DUPLICATES
                            "SOC_2_NAME", "SOC_3", "SOC_3_NAME", "SOC_4", "SOC_4_NAME", "SOC_5", "SOC_5_NAME", "LIGHTCAST_SECTORS", "LIGHTCAST_SECTORS_NAME", "NAICS_2022_2", "NAICS_2022_3", "NAICS_2022_4", "NAICS_2022_5", "NAICS_2022_6",
                            "MSA", "MSA_NAME"]
 df_cleaned = df.drop(*cols_to_drop)
-#df_cleaned.show(5, truncate = False)
+df_cleaned.show(5, truncate = False)
 ```
 
 ```{python}
 # Listing data types of the cleaned DataFrame
-#df_cleaned.dtypes
+df_cleaned.dtypes
 ```
 
 ```{python}
@@ -88,7 +88,7 @@ ml_data_df = spark.sql("""
                             AND TITLE_CLEAN LIKE '%machine learning%';
                             """)
 ml_data_pd = ml_data_df.toPandas()
-#ml_data_pd.info()
+ml_data_pd.info()
 ```
 
 ```{python}
@@ -133,7 +133,7 @@ ba_da_cols_to_drop = ['ONET_NAME', 'SOC_2021_2_NAME', 'SOC_2021_3_NAME', 'SOC_20
        'SOC_2021_5_NAME', 'LOT_CAREER_AREA_NAME', 'LOT_OCCUPATION_NAME','LOT_V6_SPECIALIZED_OCCUPATION_NAME',
        'LOT_V6_OCCUPATION_NAME', 'NAICS_2022_4_NAME', 'NAICS_2022_3_NAME', 'NAICS_2022_5_NAME', 'NAICS_2022_6_NAME',  'MAX_YEARS_EXPERIENCE', 'MAX_EDULEVELS_NAME']
 ba_da_data_pd = ba_da_data_pd.drop(columns=ba_da_cols_to_drop, axis=1) 
-#ba_da_data_pd.info()
+ba_da_data_pd.info()
 ```
 
 ```{python}
@@ -151,7 +151,7 @@ ds_data_cols_to_drop = ['ONET_NAME', 'SOC_2021_2_NAME', 'SOC_2021_3_NAME', 'SOC_
                         'LOT_V6_OCCUPATION_NAME', 'NAICS_2022_4_NAME', 'NAICS_2022_3_NAME','NAICS_2022_5_NAME', 'NAICS_2022_6_NAME',
                         'MAX_YEARS_EXPERIENCE', 'MAX_EDULEVELS_NAME']
 ds_data_pd = ds_data_pd.drop(columns=ds_data_cols_to_drop, axis=1) 
-#ds_data_pd.info() 
+ds_data_pd.info() 
 ```
 
 ```{python}
@@ -159,7 +159,7 @@ ds_data_pd = ds_data_pd.drop(columns=ds_data_cols_to_drop, axis=1)
 # Removing job postings with no titles and min years of experience
 ds_data_pd = ds_data_pd.dropna(subset = ['TITLE_CLEAN'])
 ds_data_pd = ds_data_pd.dropna(subset = ['MIN_YEARS_EXPERIENCE'])
-#ds_data_pd.info()
+ds_data_pd.info()
 ```
 
 ```{python}
@@ -799,8 +799,8 @@ metrics_df.to_csv("./data/rf_metrics_table.csv")
 print(metrics_df.to_string(index=False))
 ```
 
-```{include} ./data/rf_metrics_table.csv
-```
+{include} ./data/rf_metrics_table.csv
+
 
 
 
