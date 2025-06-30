@@ -32,7 +32,7 @@ Summarise the findings
 # Data Cleaning and Preprocessing
 
 ```{python}
-
+#| warning: false
 
 import pandas as pd
 import numpy as np
@@ -76,6 +76,7 @@ df_cleaned = df.drop(*cols_to_drop)
 ```
 
 ```{python}
+#| warning: false
 # Converting spark dataframe to SQL table to have subsets for Machine Learning positions.
 df_cleaned.createOrReplaceTempView("job_postings_data")
 
@@ -97,7 +98,7 @@ ml_data_df.select("TITLE_CLEAN").distinct().show(10, truncate=False)
 **ML specific positions are limited in title clean** - Since we cannot seem to distinguish the data between Data Science and Machine Learning, from the dataset using job titles, we will focus on Data Scientist and Business Analyst positions. Qualitative data also suggested a strong overlap between Data Science and Machine Learning positions because the current job market expects candidates for Data scientist positions to have skills in not just ML models but production deployment and Artificial intelligence as well. [@Nobrega2023DataScienceSkills]
 
 ```{python}
-#| output: false
+
 # Subsetting the main dataframe for Business Analyst, Data Analyst and Business Intelligence positions.
 
 ba_da_data_df = spark.sql("""
@@ -113,7 +114,7 @@ ba_da_data_pd = ba_da_data_df.toPandas()
 ```
 
 ```{python}
-#| output: false
+
 # Subsetting the main dataframe for Data Science positions.
 ds_data_df = spark.sql("""
                       SELECT *
@@ -126,7 +127,7 @@ ds_data_pd = ds_data_df.toPandas()
 ```
 
 ```{python}
-#| output: false
+
 # Condensing both dataframes to remove additional unncessary columns.
 ba_da_cols_to_drop = ['ONET_NAME', 'SOC_2021_2_NAME', 'SOC_2021_3_NAME', 'SOC_2021_4_NAME',
        'SOC_2021_5_NAME', 'LOT_CAREER_AREA_NAME', 'LOT_OCCUPATION_NAME','LOT_V6_SPECIALIZED_OCCUPATION_NAME',
@@ -136,7 +137,7 @@ ba_da_data_pd = ba_da_data_pd.drop(columns=ba_da_cols_to_drop, axis=1)
 ```
 
 ```{python}
-#| output: false
+
 # Removing job postings with no titles and min years of experience
 ba_da_data_pd = ba_da_data_pd.dropna(subset = ['TITLE_CLEAN'])
 ba_da_data_pd = ba_da_data_pd.dropna(subset = ['MIN_YEARS_EXPERIENCE'])
@@ -144,7 +145,7 @@ ba_da_data_pd = ba_da_data_pd.dropna(subset = ['MIN_YEARS_EXPERIENCE'])
 ```
 
 ```{python}
-#| output: false
+
 ds_data_cols_to_drop = ['ONET_NAME', 'SOC_2021_2_NAME', 'SOC_2021_3_NAME', 'SOC_2021_4_NAME','LOT_CAREER_AREA_NAME', 
                         'LOT_OCCUPATION_NAME','LOT_SPECIALIZED_OCCUPATION_NAME', 'LOT_V6_SPECIALIZED_OCCUPATION_NAME',
                         'LOT_V6_OCCUPATION_NAME', 'NAICS_2022_4_NAME', 'NAICS_2022_3_NAME','NAICS_2022_5_NAME', 'NAICS_2022_6_NAME',
@@ -154,7 +155,7 @@ ds_data_pd = ds_data_pd.drop(columns=ds_data_cols_to_drop, axis=1)
 ```
 
 ```{python}
-#| output: false
+
 # Removing job postings with no titles and min years of experience
 ds_data_pd = ds_data_pd.dropna(subset = ['TITLE_CLEAN'])
 ds_data_pd = ds_data_pd.dropna(subset = ['MIN_YEARS_EXPERIENCE'])
@@ -189,7 +190,7 @@ ds_data_pd['EMPLOYMENT_TYPE_NAME'].astype('category')
 ```
 
 ```{python}
-#| output: false
+
 # Converting education levels into 2 categories Bachelor's or lower and Master's or PhD
 import ast # Using ast.literal_eval to first convert stringified lists into python lists 
 import re # Need to remove those extra spaces in the Masters degree for proper classification
@@ -262,7 +263,7 @@ ds_data_pd.drop(columns=['REMOTE_TYPE_NAME', 'EDUCATION_LEVELS_NAME',
 # Geographical analysis of Business Analytics, Data Science and Machine Learning
 
 ```{python}
-#| warning: false
+
 # Since the data is ready we can now create comparison bar plots 
 # Top 10 states with highest number of job postings for Business Analyst, Data Analyst and Data Scientist positions
 import hvplot.pandas
@@ -665,7 +666,7 @@ hbar_ds.write_image("./visualizations/avg_exp_indds.png", width=1000, height=800
 # Machine Learning: Random Forest for predicting Salary
 
 ```{python}
-#| warning: false
+
 # Converting pandas dataframes back into spark 
 ba_da_data_df = spark.createDataFrame(ba_da_data_pd)
 ds_data_df = spark.createDataFrame(ds_data_pd)
@@ -686,9 +687,7 @@ ml_combined_df = ml_ba_da_df.unionByName(ml_ds_data_df)
 # Cleaning the target variable and features in the dataset: Feature Engineering
 
 ```{python}
-#| warning: false
-#| output: false
-#| eval: false
+
 from pyspark.sql.functions import col, pow
 from pyspark.ml.feature import StringIndexer, OneHotEncoder, VectorAssembler, CountVectorizer
 from pyspark.ml import Pipeline
@@ -724,9 +723,7 @@ data.select("SALARY", "features").show(5, truncate = True)
 # Splitting the prepared data into Training and Test set
 
 ```{python}
-#| warning: false
-#| output: false
-#| eval: false
+
 train_data, test_data = data.randomSplit([0.8, 0.2], seed = 317)
 print((train_data.count()), len(train_data.columns))
 print((test_data.count()), len(test_data.columns))
@@ -737,9 +734,7 @@ print((test_data.count()), len(test_data.columns))
 ```
 
 ```{python}
-#| warning: false
-#| output: false
-#| eval: false
+
 from pyspark.ml.regression import RandomForestRegressor
 
 # Initiating the model
@@ -753,9 +748,7 @@ rf_preds = rf_model.transform(train_data.select("SALARY", "features"))
 ```
 
 ```{python}
-#| warning: false
-#| output: false
-#| eval: false
+
 skill_features = cv_model.vocabulary  # List of strings
 all_feature_names = ["MIN_YEARS_EXPERIENCE", "EDU_IDX"] + skill_features
 
@@ -771,8 +764,7 @@ feature_df = pd.DataFrame({
 # Visualizing Feature Importance
 
 ```{python}
-#| warning: false
-#| eval: false
+
 top_n = 10
 top_features = feature_df.head(top_n)
 
@@ -792,8 +784,7 @@ plt.savefig("./visualizations/rf_feature_importance.png", dpi=300, bbox_inches='
 # Extracting evaluation metrics 
 
 ```{python}
-#| warning: false
-#| eval: false
+
 from pyspark.ml.evaluation import RegressionEvaluator
 evaluator = RegressionEvaluator(labelCol="SALARY", predictionCol="prediction")
 
